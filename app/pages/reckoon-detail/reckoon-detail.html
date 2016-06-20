@@ -1,0 +1,103 @@
+<!--
+  Generated template for the ReckoonDetailPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+	<ion-title>ReckoonDetail</ion-title>
+</ion-navbar>
+
+<ion-content  class="reckoon-detail">
+	<div showWhen="data == null">
+		<ion-spinner name="bubbles"></ion-spinner>
+	</div>
+	<ion-card *ngIf = "data != null">
+		<ion-item>
+			<ion-avatar item-left>
+				<img src="img/countupBackground.jpg">
+			</ion-avatar>
+			<h2>{{data.screenName}}</h2>
+			<p>{{data.lastUpdated | amTimeAgo}}</p>
+		</ion-item>
+		<ion-item clear *ngIf = "data.type=='COUNTER'" style="color:white;background-size:cover;background-image: url(img/counterBackground.jpg);">
+			<ion-row  (click)="showDetail(data._id)" >
+				{{data.message|textShort : [30]}}
+			</ion-row>
+			<ion-row >
+				<ion-col width=80></ion-col>
+				<ion-col width=20>
+					<ion-row class="large light number">{{data.lastValueUpdated}}</ion-row>
+					<ion-row>{{data.unit}}</ion-row>
+				</ion-col>
+			</ion-row>
+
+		</ion-item> 
+		<!-- section for countdown reckoons  -->
+		<ion-card-content *ngIf = "data.type=='COUNTDOWN'" style="color:white;background-size:cover;background-image: url(img/countdownBackground.jpg);">
+			<ion-row item-right>
+				{{data.endDateTime}}
+			</ion-row>
+			<ion-row item-left (click)="showDetail()">
+				<i>until</i>
+			</ion-row>
+			<ion-row>
+				{{data.message|textShort : [30]}}
+			</ion-row>
+		</ion-card-content>
+		<!--  end section for countdown reckoons  -->
+		<!-- section for countup reckoons  -->
+		<ion-card-content *ngIf = "data.type=='COUNTUP'" style="color:white;background-size:cover;background-image: url(img/countupBackground.jpg);">
+			<ion-row item-right>
+				{{data.startDateTime}}
+			</ion-row>
+			<ion-row item-left (click)="showDetail()">
+				<i>since</i>
+			</ion-row>
+			<ion-row>
+				{{data.message|textShort : [30]}}
+			</ion-row>
+		</ion-card-content>
+		<!--  end section for countup reckoons  -->
+		<ion-item>
+			<button primary clear item-left>
+				<ion-icon name="heart"></ion-icon>
+				<div>{{data.followerCount}} following</div>
+			</button>
+			<button primary clear item-left>
+				<ion-icon name="text"></ion-icon>
+				<div>{{data.commentCount}} Comments</div>
+			</button>
+			<ion-note item-right>
+				11h ago
+			</ion-note>
+		</ion-item>
+	</ion-card>
+	<div padding>
+		<ion-segment >
+			<ion-segment-button value="All">
+				All
+			</ion-segment-button>
+			<ion-segment-button value="Comments">
+				Comments
+			</ion-segment-button>
+			<ion-segment-button value="Values">
+				Values
+			</ion-segment-button>
+		</ion-segment>
+	</div>
+	<div showWhen="comments == null">
+		<ion-spinner name="bubbles"></ion-spinner>
+	</div>
+	<ion-list *ngIf = "comments != null">
+		<ion-item *ngFor="let item of comments">
+			<ion-avatar item-left>
+				<img src="{{profileImg}}">
+			</ion-avatar>
+			<h2>{{item.screenName}}</h2>
+			<h3>{{item.message}}</h3>
+			<p>{{item.createdAt | amTimeAgo}}</p>
+		</ion-item>
+	</ion-list>
+	
+</ion-content>

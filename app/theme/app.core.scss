@@ -1,0 +1,22 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Shared Imports
+// --------------------------------------------------
+// These are the imports which make up the design of this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+
+@import '../pages/home/home';
+@import "../pages/profile/profile.scss";
+@import "../pages/reckoon-detail/reckoon-detail.scss";
+@import "../pages/reckoon-modal/reckoon-modal.scss";
+@import "../pages/signup/signup.scss";
+@import "../pages/masthead/masthead.scss";
+@import "../pages/create-reckoon-choose/create-reckoon-choose.scss";
+@import "../pages/create-counter/create-counter.scss";
+@import "../pages/verify-user/verify-user.scss";
+@import "../pages/create-countdown/create-countdown.scss";
+@import "../pages/create-countup/create-countup.scss";
+@import "../pages/discover/discover.scss";
+@import "../pages/take-photo/take-photo.scss";

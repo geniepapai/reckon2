@@ -1,0 +1,95 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+	<ion-title>Profile</ion-title>
+</ion-navbar>
+
+
+<ion-content class="profile" >
+	<ion-list no-lines *ngIf="profileData !== null">
+		<ion-list-header>
+			Info
+		</ion-list-header>
+		<ion-item>
+			<ion-avatar item-left *ngIf="profileData.type === 'PRIVATE' || profileData.type === 'PUBLIC' ">
+				<img src={{profileData.profile.profileImg}}>
+
+			</ion-avatar>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<h2>{{profileData.profile.screenName}}</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PUBLIC'">
+				<h2>{{profileData.screenName}}</h2>
+			</ion-row>
+		</ion-item>
+		<ion-item>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<ion-note>joined {{profileData.createdAt | amTimeAgo}}</ion-note>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PUBLIC'">
+				<ion-note>joined {{profileData.joinedOn | amTimeAgo}}</ion-note>
+			</ion-row>
+		</ion-item>
+		<ion-item>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<h2>{{profileData.profile.screenName}}</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PUBLIC'">
+				<h2>{{profileData.screenName}}</h2>
+			</ion-row>
+		</ion-item>
+		<ion-list-header>
+			Linked Accounts
+		</ion-list-header>
+		<ion-item>
+			Google
+		</ion-item>
+		<ion-item>
+			twitter
+		</ion-item>
+	</ion-list>
+	<ion-card >
+		<ion-grid >
+			<ion-row>
+				<ion-item>
+					<ion-avatar item-left>
+						<img src="img/countupBackground.jpg">
+
+					</ion-avatar>
+					Latest Picture:
+					<img [src]="base64Image" *ngIf="base64Image" />
+				</ion-item>
+
+				<button (click)="takePicture()"><ion-icon name="camera"></ion-icon></button>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<h2>joined {{profileData.createdAt | amTimeAgo}}</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PUBLIC'">
+				<ion-note>joined {{profileData.joinedOn | amTimeAgo}}</ion-note>
+			</ion-row>
+			<ion-row >
+				<h2>Profile Info</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<h2>{{profileData.profile.screenName}}</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PUBLIC'">
+				<h2>{{profileData.screenName}}</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<h2>{{profileData.profile.smscode}}</h2>
+			</ion-row>
+			<ion-row *ngIf="profileData.type == 'PRIVATE'">
+				<h2>{{profileData.username}}</h2><ion-icon name="star"></ion-icon>
+			</ion-row>
+			<ion-row>
+				<!-- <p>{{data.message}}</p> -->
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+</ion-content>

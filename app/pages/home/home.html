@@ -1,0 +1,130 @@
+<ion-navbar *navbar >
+  <ion-buttons start>
+    <button (click)="discover()">
+      discover
+    </button>
+  </ion-buttons>
+  <ion-title>
+    Home
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="createReckoon()">
+     <ion-icon name="create"></ion-icon>
+   </button>
+ </ion-buttons>
+</ion-navbar>
+
+<ion-content class="home card-background-page" >
+<!-- <ion-input type="text" placeholder="screen name" [(ngModel)]="me.screenName" ></ion-input>
+<ion-input type="text" placeholder="message" [(ngModel)]="me.message" ></ion-input>
+<ion-input type="text" placeholder="unit" [(ngModel)]="me.unit" ></ion-input>
+<button full (click)="addCard()">Add Card</button> -->
+<ion-card *ngIf = "feedData.length == 0" >
+
+  <ion-row padding>
+    This place looks a bit lonely, discover reckoon by tapping below or create reckoon from toolbar 
+  </ion-row>
+  <button clear full (click) = "discover()">Discover reckoons</button>
+
+</ion-card>
+
+<!-- <button fab secondary fab-top fab-right>
+  <ion-icon name="share" is-active="true"></ion-icon>
+</button> -->
+
+<ion-card *ngFor = "let item of feedData" >
+ <ion-item>
+  <ion-avatar item-left>
+    <img src="img/countupBackground.jpg">
+  </ion-avatar>
+  <h2 (click)="showProfile(item.screenName,item.userId)">{{item.screenName}}</h2>
+  <p>{{item.lastUpdated | amTimeAgo}}</p>
+</ion-item>
+<!-- <img src="img/counterBackground.jpg" *ngIf = "item.type=='COUNTER'"/> -->
+<!-- <img src="img/countdownBackground.jpg" *ngIf = "item.type=='COUNTDOWN'" /> -->
+<!-- <img src="img/countupBackground.jpg" *ngIf = "item.type=='COUNTUP'" /> -->
+<!-- <div *ngIf = "item.type=='COUNTER'" style="background-size:cover;background-image: url(img/countdownBackground.jpg);"> -->
+<ion-item padding clear *ngIf = "item.type=='COUNTER'" style="color:white;background-size:cover;background-image: url(img/counterBackground.png);">
+  <ion-row  padding class=" dark" (click)="showDetail(item._id)" >
+    {{item.message|textShort : [30]}}
+  </ion-row>
+  <ion-row padding (click)="addMessage(item.screenName,item._id,'ADDVALUE')">
+  <ion-col width-70></ion-col>
+    <ion-col class="dark" width-30>
+      <ion-row *ngIf="item.lastUpdated" class="large number center" >
+
+        {{item.lastValueUpdated}}
+      </ion-row>
+      <ion-row *ngIf="item.lastUpdated == null" class="large number center" >
+        Add
+      </ion-row>
+      <ion-row>{{item.unit}}</ion-row>
+    </ion-col>
+  </ion-row>
+  
+</ion-item> 
+
+
+<!-- section for countdown reckoons  -->
+<ion-card-content padding *ngIf = "item.type=='COUNTDOWN'" style="background-size:cover;background-image: url(img/countdownBackground.png);">
+  <ion-row padding item-right (click)="modifyDate(item._id)">
+    {{item.endDateTime | amDateFormat:'dddd, Do MMMM YYYY'}}
+
+  </ion-row>
+
+  <ion-row >
+    <h1>{{getDays(item.endDateTime,item_id,'DAYS')}} days</h1>
+  </ion-row>
+  <ion-row padding item-left >
+    <i id={{item._id}}>{{getDays(item.endDateTime,item_id,'TEXT')}}</i>
+  </ion-row>
+  <ion-row padding (click)="showDetail(item._id)">
+    {{item.message|textShort : [30]}}
+  </ion-row>
+</ion-card-content>
+<!--  end section for countdown reckoons  -->
+<!-- section for countup reckoons  -->
+<ion-card-content padding *ngIf = "item.type=='COUNTUP'" style="color:white;background-size:cover;background-image: url(img/countdownBackground.png);">
+  <ion-item style="background:transparent">
+    <ion-row padding item-right (click)="modifyDate(item._id)">
+      {{item.startDateTime | amDateFormat:'dddd, Do MMMM YYYY'}}
+      
+    </ion-row>
+   <!--  <ion-row  padding class="dark">
+      <h2>{{item.startDateTime | amDateFormat:'LL'}}</h2>
+    </ion-row> -->
+  </ion-item>
+ <!--  <ion-row class="dark">
+    <h3>{{item.startDateTime | amTimeAgo }}</h3>
+  </ion-row> -->
+  <!-- <ion-datetime width-100 displayFormat="DDDD MMM DD, YYYY" [(ngModel)]="item.startDateTime"></ion-datetime> -->
+  <ion-row >
+    <h1>{{getDays(item.startDateTime,item_id,'DAYS')}} days</h1>
+  </ion-row>
+
+
+  <ion-row padding item-left class="dark">
+    <h2><i>since</i></h2>
+  </ion-row>
+  <ion-row padding class="dark" (click)="showDetail(item._id)">
+    <h1>{{item.message|textShort : [30]}}</h1>
+  </ion-row>
+</ion-card-content>
+<!--  end section for countup reckoons  -->
+<ion-item>
+  <button primary clear item-left>
+    <ion-icon name="heart"></ion-icon>
+    <div>{{item.followerCount}} following</div>
+  </button>
+  <button primary clear item-right>
+    <ion-icon name="text"></ion-icon>
+    <div>{{item.commentCount}} Comments</div>
+  </button>
+  <button primary clear item-right (click)="addMessage(item.screenName,item._id,'ADDMESSAGE')">
+    <ion-icon name="add-circle"></ion-icon>
+  </button>
+</ion-item>
+
+</ion-card>
+</ion-content>
+

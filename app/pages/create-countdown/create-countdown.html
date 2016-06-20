@@ -1,0 +1,44 @@
+<!--
+  Generated template for the CreateCountdownPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <ion-title>createCountdown</ion-title>
+</ion-navbar>
+
+<ion-content padding class="create-countdown">
+  <ion-card>
+  <ion-card-header>countdown</ion-card-header>
+		<ion-row>
+			<ion-item>
+			<ion-label>Public</ion-label>
+				<ion-toggle checked="true" [(ngModel)] = "visbility"></ion-toggle>
+			</ion-item>
+		</ion-row>
+		<ion-row>
+			<ion-item>
+				<ion-label floating>name your countdown</ion-label>
+				<ion-input type="text" [(ngModel)] = "reckoonName"></ion-input>
+			</ion-item>
+		</ion-row>
+		<ion-row>
+			<ion-item>
+				<ion-label floating>counting down to date</ion-label>
+				<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)] = "reckoonEndDate">
+					
+				</ion-datetime>
+			</ion-item>
+		</ion-row>
+		<ion-row>
+			<ion-item>
+				<ion-label floating>enter comment (optional)</ion-label>
+				<ion-input type="text" [(ngModel)] = "comment"></ion-input>
+			</ion-item>
+		</ion-row>
+		<ion-row>
+			<button full (click)="createReckoon()">create</button>
+		</ion-row>
+  </ion-card>
+</ion-content>
